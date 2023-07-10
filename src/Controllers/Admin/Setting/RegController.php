@@ -14,12 +14,8 @@ final class RegController extends BaseController
     public static array $update_field = [
         'reg_mode',
         'reg_email_verify',
-        'email_verify_ttl',
-        'email_verify_ip_limit',
-        'email_verify_email_limit',
         'sign_up_for_daily_report',
         'enable_reg_im',
-        'enable_reg_new_shop',
         'random_group',
         'min_port',
         'max_port',
@@ -31,7 +27,7 @@ final class RegController extends BaseController
         'sign_up_for_class_time',
         'sign_up_for_method',
         'sign_up_for_invitation_codes',
-        'connection_device_limit',
+        'connection_ip_limit',
         'connection_rate_limit',
         'reg_forbidden_ip',
         'reg_forbidden_port',
@@ -69,9 +65,9 @@ final class RegController extends BaseController
             $setting = Setting::where('item', '=', $item)->first();
 
             if ($setting->type === 'array') {
-                $setting->value = json_encode($request->getParam("{$item}"));
+                $setting->value = json_encode($request->getParam($item));
             } else {
-                $setting->value = $request->getParam("{$item}");
+                $setting->value = $request->getParam($item);
             }
 
             if (! $setting->save()) {

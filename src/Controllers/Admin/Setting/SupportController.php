@@ -17,11 +17,9 @@ final class SupportController extends BaseController
         'crisp_id',
         'livechat_id',
         'mylivechat_id',
-        // Admin Contact
-        'enable_admin_contact',
-        'admin_contact1',
-        'admin_contact2',
-        'admin_contact3',
+        // Ticket
+        'enable_ticket',
+        'mail_ticket',
     ];
 
     /**
@@ -56,9 +54,9 @@ final class SupportController extends BaseController
             $setting = Setting::where('item', '=', $item)->first();
 
             if ($setting->type === 'array') {
-                $setting->value = json_encode($request->getParam("{$item}"));
+                $setting->value = json_encode($request->getParam($item));
             } else {
-                $setting->value = $request->getParam("{$item}");
+                $setting->value = $request->getParam($item);
             }
 
             if (! $setting->save()) {

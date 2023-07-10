@@ -76,13 +76,13 @@ END;
                     continue;
                 }
                 $version = (int) explode('-', $file, 1)[0];
-                echo "Found migration version {$version}";
+                echo "Found migration version {$version}.";
                 if ($version <= $min_version || $version > $max_version) {
                     echo "...skip\n";
                     continue;
                 }
                 echo "\n";
-                $object = require BASE_PATH . '/db/migrations/' . $file;
+                $object = require_once BASE_PATH . '/db/migrations/' . $file;
                 if ($object instanceof MigrationInterface) {
                     $queue[$version] = $object;
                 }
